@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Concept of NoSQL DynamoDB",
   "main": "index.js",
+  "script": {
+    "build": "tsc"
+  },
   "repository": "git@github.com:RNekoCloud/dyno-concept.git",
   "author": "RageNeko26",
   "license": "MIT",
@@ -11,5 +14,8 @@
     "@types/node": "^20.11.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1539.0"
   }
 }
