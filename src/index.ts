@@ -1,24 +1,33 @@
-import AWS from "aws-sdk";
-import DynoParams from "./types/dyno_param";
+import { AttributeAction, CreateTableCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
 
-// Load up shared configuration AWS in local machine
-const credentials = new AWS.SharedIniFileCredentials();
-AWS.config.credentials = credentials;
+const client = new DynamoDBClient({
+    endpoint: "http://localhost:8000",
+    
+});
 
-// Set region into config
-AWS.config.update({region: "us-east-1"});
-console.log("Hello from AWS SDK...");
+const init = async() => {
+    const command = new CreateTableCommand({
+        TableName: "todo_dev",
+        AttributeDefinitions: [
+            {
+                AttributeName: "id",
+                AttributeType: "S",
+            },
+        ],
+        KeySchema: [
+            {
+                AttributeName: "id",
+                KeyType:  "HASH",
+            },
+        ],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 1,
+            WriteCapacityUnits: 1,
+        }
+    })
 
-// Setup DynamoDB
-const dyno = new AWS.DynamoDB({ apiVersion: "2012-08-10"})
-
-// Getting data by params
-const params: DynoParams = {
-    TableName: "todo_app",
-    Key: {
-        ID: {
-            N: "1"
-        },
-    },
-    ProjectionExpression: "",
+    const response = await client.send(command)
+    console.log(response)
 }
+
+init()
