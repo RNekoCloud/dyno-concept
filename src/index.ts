@@ -1,4 +1,4 @@
-import { AttributeAction, CreateTableCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import {  CreateTableCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
 
 const client = new DynamoDBClient({
     endpoint: "http://localhost:8000",
