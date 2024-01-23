@@ -1,9 +1,5 @@
 import {  CreateTableCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
-
-const client = new DynamoDBClient({
-    endpoint: "http://localhost:8000",
-    
-});
+import { DynoClient } from "../../constant/config";
 
 const init = async() => {
     const command = new CreateTableCommand({
@@ -26,7 +22,7 @@ const init = async() => {
         }
     })
 
-    const response = await client.send(command)
+    const response = await DynoClient.send(command)
     console.log(response)
 }
 
