@@ -1,4 +1,4 @@
-import {  CreateTableCommand, DynamoDBClient } from "@aws-sdk/client-dynamodb";
+import {  CreateTableCommand } from "@aws-sdk/client-dynamodb";
 import { DynoClient } from "../../constant/config";
 
 const init = async() => {
