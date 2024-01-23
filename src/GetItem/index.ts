@@ -5,14 +5,14 @@ const init = async() => {
     const input: GetItemCommandInput = {
         Key: {
             "noteid": {
-                S: "foo-xxx-01",
+                S: "foo-xxx-02",
             },
         },
         TableName: "notes"
     }
     const cmd = new GetItemCommand(input);
     const response = await DynoClient.send(cmd);
-    console.log(response.Item?.title)
+    console.log(response.Item)
 };
 
 init();

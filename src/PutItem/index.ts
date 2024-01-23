@@ -6,10 +6,10 @@ const init = async() => {
         TableName: "notes",
         Item: {
             "noteid": {
-                S: "foo-xxx-01",
+                S: "foo-xxx-02",
             },
             "title": {
-                S: "My Shopping List",
+                S: "Watch List Anime and Series",
             },
             "body": {
                 S: "Lorem of my note",
