@@ -1,21 +1,22 @@
 import { PutItemCommand, PutItemCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynoClient } from "../../constant/config";
+import { nanoid } from "nanoid"
 
 const init = async() => {
     const input: PutItemCommandInput = {
         TableName: "notes",
         Item: {
             "noteid": {
-                S: "foo-xxx-02",
+                S: nanoid(),
             },
             "title": {
-                S: "Watch List Anime and Series",
+                S: "Bar's appointment",
             },
             "body": {
-                S: "Lorem of my note",
+                S: "Lorem of my Bar Appointment",
             },
         },
-        ReturnConsumedCapacity: "TOTAL"
+        ReturnConsumedCapacity: "TOTAL",
     };
 
     const cmd = new PutItemCommand(input)
