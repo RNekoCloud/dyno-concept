@@ -15,7 +15,7 @@ const init = async() => {
     if(scan.LastEvaluatedKey) {
         page += 1;
         input.ExclusiveStartKey = scan.LastEvaluatedKey;
-        scanUntilDone(input);
+        scanUntilDone(params);
     } else {
         console.log("Scanning is done");
         console.log(`Total page is: ${page}`)
