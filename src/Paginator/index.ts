@@ -1,19 +1,29 @@
-import { paginateScan } from "@aws-sdk/client-dynamodb";
+import { ScanCommand, ScanCommandInput } from "@aws-sdk/client-dynamodb";
 import { DynoClient } from "../../constant/config"
 
 const init = async() => {
-   const paginator = paginateScan({
-    pageSize: 3,
-    client: DynoClient,
-    startingToken: "foo-xxx-03"
-   }, 
-   {
-    TableName: "notes",
-   });
+    let page: number = 1;
+    let input: ScanCommandInput = {
+        TableName: "notes",
+        Limit: 3,
+    };
+   const scanUntilDone = async(params: ScanCommandInput) => {
+    
+    const cmd = new ScanCommand(input);
+    const scan = await DynoClient.send(cmd);
 
-   const page = await paginator.next();
-   const items = page.value?.Items;
-   console.log(items)
+    if(scan.LastEvaluatedKey) {
+        page += 1;
+        input.ExclusiveStartKey = scan.LastEvaluatedKey;
+        scanUntilDone(input);
+    } else {
+        console.log("Scanning is done");
+        console.log(`Total page is: ${page}`)
+    }
+   }
+
+   scanUntilDone(input);
+    
 };
 
 init();
