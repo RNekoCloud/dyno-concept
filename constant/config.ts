@@ -4,3 +4,5 @@ export const DynoClient = new DynamoDBClient({
     // Use DynamoDB local
     endpoint: "http://localhost:8000",
 });
+
+export const DynoHosted = new DynamoDBClient({})
